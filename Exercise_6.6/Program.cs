@@ -57,7 +57,7 @@ namespace Exercise_6._6
 			else
 			{
 				Console.WriteLine("Файл не существует.");
-				//WriteLine("Выберете другое: ");
+				
 			}
 			Way();
 
@@ -95,7 +95,7 @@ namespace Exercise_6._6
 					Write("Место рождения: ");
 					string spawn = ReadLine();
 
-					text = id + "#" + dateTime + "#" + fio + "#" + age + "#" + h + "#" + data + "#" + spawn + "#"; 
+					text = id + "#" + dateTime + "#" + fio + "#" + age + "#" + h + "#" + data + "#" + spawn; 
 					sw.WriteLine(text);
 
 					WriteLine("Продолжить - Д/Н"); key = ReadKey(true).KeyChar;
