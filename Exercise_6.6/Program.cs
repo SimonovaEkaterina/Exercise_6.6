@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Exercise_6._6
 {
@@ -14,62 +15,56 @@ namespace Exercise_6._6
 		//Справочник " Сотрудники "
 
 		{
-			Way();
-
+			string Employees = @"Employees.txt";
+			
+			P(Employees);
+			Way(Employees);
 		}
 		/// <summary>
 		/// Меню
 		/// </summary>
-		static void Way()
+		static void Way(string Employees)
 		{
-			WriteLine("'1' - Вывести данные на экран. '2' - Заполнить данные и добавить новую записть в конец списка. 3 - Проверка. 4 - Выход");
+			WriteLine("'1' - Вывести данные на экран. '2' - Заполнить данные и добавить новую записть в конец списка. '3' - Выход");
 			string num = ReadLine();
 			switch (num)
 			{
 				case "1":
-					Append();
+					Append(Employees);
 					break;
 				case "2":
-					Print();
+					Print(Employees);
 					break;
 				case "3":
-					P();
-					break;
-				case "4":
-					
+
 					break;
 			}
-
 		}
+
 		/// <summary>
 		/// Проверка
 		/// </summary>
-		static void P()
-		{
-
-			string Employees = @"Employees.txt";
-
+		static void P(string Employees)
+		{			
 			bool fileExist = File.Exists(Employees);
 			if (fileExist)
 			{
-				Console.WriteLine("Файл существует.");
+				Console.WriteLine("Файл, существует.");
 			}
 			else
 			{
-				Console.WriteLine("Файл не существует.");
-				
+				Console.WriteLine("Файл, не существует.");
+				File.Create(Employees).Close();				
+				WriteLine("Файл, Создан.");		
 			}
-			Way();
-
 		}
 		/// <summary>
 		/// Запись 
 		/// </summary>
-		static void Print()
+		static void Print(string Employees)
 		{
-			using (StreamWriter sw = new StreamWriter("Employees.txt", true, Encoding.Unicode))
-			{
-				
+			using (StreamWriter sw = new StreamWriter(Employees, true))
+			{				
 				char key = 'д';
 				do
 				{
@@ -102,15 +97,13 @@ namespace Exercise_6._6
 				}
 				while (char.ToLower(key) == 'д');
 			}
-			
-			Way();
 		}
 		/// <summary>
 		/// Четение
 		/// </summary>
-		static void Append()
+		static void Append(string Employees)
 		{
-			using (StreamReader sr = new StreamReader("Employees.txt", Encoding.Unicode ))
+			using (StreamReader sr = new StreamReader(Employees))
 			{
 				string Line;
 				WriteLine($"{"ID: "}{"Время: "}{"Ф.И.О: "}{"Возраст: "}{"Рост: "}{"Дата рождениия: "}{"Место рождения: "} ");
@@ -121,8 +114,7 @@ namespace Exercise_6._6
 					WriteLine($"{data[0]} {data[1]} {data[2]} {data[3]} {data[4]} {data[5]} {data[6]} ");
 				}
 			}
-			
-			Way();
+			Way(Employees);
 		}
 	}
 }
